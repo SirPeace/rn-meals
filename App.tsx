@@ -1,7 +1,7 @@
 import React from "react"
-import { StyleSheet, Text, View } from "react-native"
 import * as Font from "expo-font"
 import AppLoading from "expo-app-loading"
+import { enableScreens } from "react-native-screens"
 
 import Navigator from "./navigation/Navigator"
 
@@ -17,7 +17,7 @@ export default function App() {
   return <Navigator />
 }
 
-const styles = StyleSheet.create({})
+enableScreens()
 
 const loadFonts = () =>
   Font.loadAsync({
