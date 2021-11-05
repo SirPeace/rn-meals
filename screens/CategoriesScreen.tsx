@@ -1,28 +1,25 @@
+import { observer } from "mobx-react-lite"
 import React from "react"
 import { View, StyleSheet, FlatList } from "react-native"
 import { NavigationStackProp } from "react-navigation-stack"
 
-import CategoryAPI, { Category } from "../api/Category"
+import { Category } from "../api/Category"
 import CategoryCard from "../components/CategoryCard"
+import Text from "../components/UI/Text"
+import store from "../store"
 
 type CategoriesScreenProps = {
   navigation: NavigationStackProp
 }
 
 const CategoriesScreen = ({ navigation }: CategoriesScreenProps) => {
-  const [categories, setCategories] = React.useState<Category[]>([])
   const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
-    CategoryAPI.get()
-      .then(categories => {
-        setCategories(categories)
-        setLoading(false)
-      })
-      .catch(err => console.error(err))
+    store.categories.fetch().then(() => setLoading(false))
   }, [])
 
-  if (loading) return null
+  if (loading) return <Text style={{ textAlign: "center" }}>Loading...</Text>
 
   const navigateToCategoryMealsScreen = (category: Category) => {
     navigation.navigate({
@@ -34,7 +31,7 @@ const CategoriesScreen = ({ navigation }: CategoriesScreenProps) => {
   return (
     <View style={styles.screen}>
       <FlatList
-        data={categories}
+        data={store.categories.data.slice()}
         renderItem={listItem => (
           <CategoryCard
             category={listItem.item}
@@ -60,4 +57,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default CategoriesScreen
+export default observer(CategoriesScreen)

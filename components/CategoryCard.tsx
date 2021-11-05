@@ -22,7 +22,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, ...props }) => {
       }}
     >
       <View style={styles.cardContent}>
-        <Text numberOfLines={2} size="lg">
+        <Text bold numberOfLines={2} size="xl">
           {category.title}
         </Text>
       </View>
