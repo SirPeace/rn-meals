@@ -1,10 +1,20 @@
 import React from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { View, StyleSheet } from "react-native"
+import { NavigationStackProp } from "react-navigation-stack"
 
-const MealScreen: React.FC = () => {
+import { Meal } from "../api/Meal"
+import Text from "../components/UI/Text"
+
+type ScreenProps = {
+  navigation: NavigationStackProp
+}
+
+const MealScreen: React.FC<ScreenProps> = ({ navigation }) => {
+  const meal = navigation.getParam("meal") as Meal
+
   return (
     <View style={styles.screen}>
-      <Text>Meal Screen</Text>
+      <Text bold>{meal.title}</Text>
     </View>
   )
 }
