@@ -1,16 +1,14 @@
 import React from "react"
 import { View, StyleSheet } from "react-native"
-import { NavigationStackProp } from "react-navigation-stack"
+import { HeaderButtons, Item } from "react-navigation-header-buttons"
+import { NavigationStackScreenComponent } from "react-navigation-stack"
 
 import { Meal } from "../api/Meal"
+import HeaderButton from "../components/HeaderButton"
 import Text from "../components/UI/Text"
 
-type ScreenProps = {
-  navigation: NavigationStackProp
-}
-
-const MealScreen: React.FC<ScreenProps> = ({ navigation }) => {
-  const meal = navigation.getParam("meal") as Meal
+const MealScreen: NavigationStackScreenComponent = props => {
+  const meal = props.navigation.getParam("meal") as Meal
 
   return (
     <View style={styles.screen}>
@@ -18,6 +16,18 @@ const MealScreen: React.FC<ScreenProps> = ({ navigation }) => {
     </View>
   )
 }
+
+MealScreen.navigationOptions = () => ({
+  headerRight: () => (
+    <HeaderButtons HeaderButtonComponent={HeaderButton}>
+      <Item
+        title="Favorite"
+        iconName="star"
+        onPress={() => console.log("favorite")}
+      />
+    </HeaderButtons>
+  ),
+})
 
 const styles = StyleSheet.create({
   screen: {

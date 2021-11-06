@@ -6,6 +6,7 @@ import CategoryMealsScreen from "../screens/CategoryMealsScreen"
 import MealScreen from "../screens/MealScreen"
 import colors from "../constants/colors"
 import { Category } from "../api/Category"
+import { Meal } from "../api/Meal"
 
 const Navigator = createStackNavigator(
   {
@@ -28,8 +29,10 @@ const Navigator = createStackNavigator(
     Meal: {
       screen: MealScreen,
       navigationOptions: ({ navigation }) => {
+        const meal = navigation.getParam("meal") as Meal
+
         return {
-          headerTitle: "Meal",
+          headerTitle: meal.title,
         }
       },
     },
