@@ -14,6 +14,7 @@ export type Meal = {
   duration: number
   ingredients: string[]
   steps: string[]
+  isFavorite: boolean
 }
 
 const MealAPI = {

@@ -1,18 +1,14 @@
 import React from "react"
 import { View, StyleSheet, FlatList } from "react-native"
-import { NavigationStackProp } from "react-navigation-stack"
 import { observer } from "mobx-react-lite"
 
 import { Category } from "../api/Category"
 import CategoryCard from "../components/CategoryCard"
 import Text from "../components/UI/Text"
 import store from "../store"
+import { NavigationBottomTabScreenComponent as TabNavigationScreen } from "react-navigation-tabs"
 
-type ScreenProps = {
-  navigation: NavigationStackProp
-}
-
-const CategoriesScreen: React.FC<ScreenProps> = ({ navigation }) => {
+const CategoriesScreen: TabNavigationScreen = ({ navigation }) => {
   const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
