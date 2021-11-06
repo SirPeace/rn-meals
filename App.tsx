@@ -1,6 +1,7 @@
 import React from "react"
 import * as Font from "expo-font"
 import AppLoading from "expo-app-loading"
+import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar"
 import { enableScreens } from "react-native-screens"
 
 import Navigator from "./navigation/Navigator"
@@ -14,7 +15,12 @@ export default function App() {
 
   if (loading) return <AppLoading />
 
-  return <Navigator />
+  return (
+    <>
+      <Navigator />
+      <ExpoStatusBar style="inverted" />
+    </>
+  )
 }
 
 enableScreens()

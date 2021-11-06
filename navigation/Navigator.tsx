@@ -2,6 +2,7 @@ import React from "react"
 import { createAppContainer } from "react-navigation"
 import { createStackNavigator } from "react-navigation-stack"
 import { createBottomTabNavigator } from "react-navigation-tabs"
+import { createDrawerNavigator, DrawerActions } from "react-navigation-drawer"
 import { HeaderButtons, Item } from "react-navigation-header-buttons"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 
@@ -13,6 +14,7 @@ import colors from "../constants/colors"
 import { Category } from "../api/Category"
 import { Meal } from "../api/Meal"
 import HeaderButton from "../components/HeaderButton"
+import FiltersScreen from "../screens/FiltersScreen"
 
 const defaultNavigationOptions = {
   headerStyle: {
@@ -25,9 +27,20 @@ const mainStackNavigator = createStackNavigator(
   {
     Categories: {
       screen: CategoriesScreen,
-      navigationOptions: {
+      navigationOptions: navData => ({
         headerTitle: "Meals Categories",
-      },
+        headerLeft: () => (
+          <HeaderButtons HeaderButtonComponent={HeaderButton}>
+            <Item
+              title="Menu"
+              iconName="menu"
+              onPress={() =>
+                navData.navigation.dispatch(DrawerActions.toggleDrawer())
+              }
+            />
+          </HeaderButtons>
+        ),
+      }),
     },
 
     CategoryMeals: {
@@ -67,13 +80,24 @@ const mainStackNavigator = createStackNavigator(
   }
 )
 
-const favoriteMealsStackNavigator = createStackNavigator(
+const favoritesStackNavigator = createStackNavigator(
   {
     Favorites: {
       screen: FavoriteMealsScreen,
-      navigationOptions: {
+      navigationOptions: navData => ({
         title: "Favorite Meals",
-      },
+        headerLeft: () => (
+          <HeaderButtons HeaderButtonComponent={HeaderButton}>
+            <Item
+              title="Menu"
+              iconName="menu"
+              onPress={() =>
+                navData.navigation.dispatch(DrawerActions.toggleDrawer())
+              }
+            />
+          </HeaderButtons>
+        ),
+      }),
     },
 
     Meal: {
@@ -88,7 +112,7 @@ const favoriteMealsStackNavigator = createStackNavigator(
   { defaultNavigationOptions }
 )
 
-const rootTabsNavigator = createBottomTabNavigator(
+const tabsNavigator = createBottomTabNavigator(
   {
     Main: {
       screen: mainStackNavigator,
@@ -105,7 +129,7 @@ const rootTabsNavigator = createBottomTabNavigator(
     },
 
     Favorites: {
-      screen: favoriteMealsStackNavigator,
+      screen: favoritesStackNavigator,
       navigationOptions: {
         tabBarIcon: tabOptions => (
           <MaterialCommunityIcons
@@ -125,4 +149,38 @@ const rootTabsNavigator = createBottomTabNavigator(
   }
 )
 
-export default createAppContainer(rootTabsNavigator)
+const filtersStackNavigator = createStackNavigator(
+  {
+    Filters: {
+      screen: FiltersScreen,
+      navigationOptions: navData => ({
+        headerLeft: () => (
+          <HeaderButtons HeaderButtonComponent={HeaderButton}>
+            <Item
+              title="Menu"
+              iconName="menu"
+              onPress={() =>
+                navData.navigation.dispatch(DrawerActions.toggleDrawer())
+              }
+            />
+          </HeaderButtons>
+        ),
+      }),
+    },
+  },
+  {
+    defaultNavigationOptions,
+  }
+)
+
+const mainDrawerNavigator = createDrawerNavigator(
+  {
+    Main: tabsNavigator,
+    Filters: filtersStackNavigator,
+  },
+  {
+    hideStatusBar: true,
+  }
+)
+
+export default createAppContainer(mainDrawerNavigator)

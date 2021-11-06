@@ -1,7 +1,8 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
+import { NavigationStackScreenComponent as StackNavigationScreen } from "react-navigation-stack"
 
-const FiltersScreen: React.FC = () => {
+const FiltersScreen: StackNavigationScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       <Text>Filters Screen</Text>
