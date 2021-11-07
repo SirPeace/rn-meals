@@ -1,8 +1,8 @@
 import React from "react"
 import * as Font from "expo-font"
 import AppLoading from "expo-app-loading"
-import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar"
 import { enableScreens } from "react-native-screens"
+import { StatusBar } from "expo-status-bar"
 
 import Navigator from "./navigation/Navigator"
 
@@ -18,7 +18,7 @@ export default function App() {
   return (
     <>
       <Navigator />
-      <ExpoStatusBar style="inverted" />
+      <StatusBar style="inverted" />
     </>
   )
 }

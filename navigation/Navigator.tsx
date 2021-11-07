@@ -153,7 +153,9 @@ const filtersStackNavigator = createStackNavigator(
   {
     Filters: {
       screen: FiltersScreen,
+
       navigationOptions: navData => ({
+        title: "Meals Filters",
         headerLeft: () => (
           <HeaderButtons HeaderButtonComponent={HeaderButton}>
             <Item
@@ -175,11 +177,28 @@ const filtersStackNavigator = createStackNavigator(
 
 const mainDrawerNavigator = createDrawerNavigator(
   {
-    Main: tabsNavigator,
-    Filters: filtersStackNavigator,
+    Main: {
+      screen: tabsNavigator,
+      navigationOptions: {
+        title: "Meals",
+      },
+    },
+    Filters: {
+      screen: filtersStackNavigator,
+      navigationOptions: {
+        title: "Meals filters",
+      },
+    },
   },
   {
     hideStatusBar: true,
+    contentOptions: {
+      activeTintColor: colors.primary,
+      labelStyle: {
+        fontWeight: "normal",
+        fontFamily: "Open Sans Bold",
+      },
+    },
   }
 )
 
