@@ -9,10 +9,11 @@ import {
 interface TextProps extends NativeTextProps {
   bold?: boolean
   size?: "sm" | "lg" | "xl"
+  style?: TextStyle
 }
 
 const Text: React.FC<TextProps> = props => {
-  let textStyles: TextStyle = styles.text
+  let textStyles: TextStyle = { ...props.style, ...styles.text }
   if (props.bold) textStyles = { ...textStyles, ...styles.text_bold }
 
   switch (props.size) {
@@ -30,7 +31,7 @@ const Text: React.FC<TextProps> = props => {
   }
 
   return (
-    <NativeText style={textStyles} {...props}>
+    <NativeText {...props} style={textStyles}>
       {props.children}
     </NativeText>
   )

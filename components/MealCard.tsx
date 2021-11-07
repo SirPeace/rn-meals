@@ -25,7 +25,9 @@ const MealCard: React.FC<MealCardProps> = ({ meal, ...props }) => {
           style={styles.thumbnail}
         >
           <View style={styles.title}>
-            <Text style={styles.titleText}>{meal.title}</Text>
+            <Text size="xl" style={styles.titleText}>
+              {meal.title}
+            </Text>
           </View>
         </ImageBackground>
 
@@ -58,7 +60,6 @@ const styles = StyleSheet.create({
   },
 
   titleText: {
-    fontSize: 20,
     color: "#fff",
   },
 
