@@ -1,6 +1,9 @@
 import React from "react"
 import { createAppContainer } from "react-navigation"
-import { createStackNavigator } from "react-navigation-stack"
+import {
+  createStackNavigator,
+  NavigationStackOptions,
+} from "react-navigation-stack"
 import { createBottomTabNavigator } from "react-navigation-tabs"
 import { createDrawerNavigator, DrawerActions } from "react-navigation-drawer"
 import { HeaderButtons, Item } from "react-navigation-header-buttons"
@@ -16,11 +19,17 @@ import { Meal } from "../api/Meal"
 import HeaderButton from "../components/HeaderButton"
 import FiltersScreen from "../screens/FiltersScreen"
 
-const defaultNavigationOptions = {
+const defaultNavigationOptions: NavigationStackOptions = {
   headerStyle: {
     backgroundColor: colors.primary,
   },
   headerTintColor: "#fff",
+  headerTitleStyle: {
+    fontFamily: "Open Sans Bold",
+  },
+  headerBackTitleStyle: {
+    fontFamily: "Open Sans",
+  },
 }
 
 const mainStackNavigator = createStackNavigator(
@@ -145,6 +154,9 @@ const tabsNavigator = createBottomTabNavigator(
     initialRouteName: "Main",
     tabBarOptions: {
       activeTintColor: colors.primary,
+      labelStyle: {
+        fontFamily: "Open Sans",
+      },
     },
   }
 )
