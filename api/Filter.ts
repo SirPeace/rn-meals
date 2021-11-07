@@ -1,7 +1,7 @@
 import axios from "axios"
 import serverConfig from "../config/server"
 
-export type Filter = {
+export interface Filter {
   id: number
   title: string
 }

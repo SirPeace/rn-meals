@@ -4,9 +4,9 @@ import { observer } from "mobx-react-lite"
 
 import { Category } from "../api/Category"
 import CategoryCard from "../components/CategoryCard"
-import Text from "../components/UI/Text"
 import store from "../store"
 import { NavigationBottomTabScreenComponent as TabNavigationScreen } from "react-navigation-tabs"
+import Loader from "../components/UI/Loader"
 
 const CategoriesScreen: TabNavigationScreen = ({ navigation }) => {
   const [loading, setLoading] = React.useState(true)
@@ -15,7 +15,7 @@ const CategoriesScreen: TabNavigationScreen = ({ navigation }) => {
     store.categories.fetch().then(() => setLoading(false))
   }, [])
 
-  if (loading) return <Text style={{ textAlign: "center" }}>Loading...</Text>
+  if (loading) return <Loader />
 
   const navigateToCategoryMealsScreen = (category: Category) => {
     navigation.navigate({

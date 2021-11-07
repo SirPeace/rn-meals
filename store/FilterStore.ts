@@ -1,11 +1,19 @@
-import { makeAutoObservable } from "mobx"
+import { makeAutoObservable, values } from "mobx"
 import FilterAPI, { Filter } from "../api/Filter"
 
+interface StoreFilter extends Filter {
+  isActive?: boolean
+}
+
 class FilterStore {
-  data: Filter[] = []
+  data: StoreFilter[] = []
 
   constructor() {
     makeAutoObservable(this)
+  }
+
+  setIsActive(filter: StoreFilter, value: boolean) {
+    filter.isActive = value
   }
 
   setFilters(filters: Filter[]) {

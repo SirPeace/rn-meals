@@ -4,7 +4,7 @@ import { NavigationStackScreenComponent as StackNavigationScreen } from "react-n
 
 import { Category } from "../api/Category"
 import MealsList from "../components/MealsList"
-import Text from "../components/UI/Text"
+import Loader from "../components/UI/Loader"
 import store from "../store"
 
 const CategoryMealsScreen: StackNavigationScreen = ({ navigation }) => {
@@ -24,7 +24,7 @@ const CategoryMealsScreen: StackNavigationScreen = ({ navigation }) => {
     [store.meals.data]
   )
 
-  if (loading) return <Text>Loading...</Text>
+  if (loading) return <Loader />
 
   return (
     <View style={styles.screen}>

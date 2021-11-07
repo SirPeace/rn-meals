@@ -3,7 +3,7 @@ import serverConfig from "../config/server"
 import { Category } from "./Category"
 import { Filter } from "./Filter"
 
-export type Meal = {
+export interface Meal {
   id: number
   categories: Category[]
   filters: Filter[]

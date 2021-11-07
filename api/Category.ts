@@ -1,7 +1,7 @@
 import axios from "axios"
 import serverConfig from "../config/server"
 
-export type Category = {
+export interface Category {
   id: number
   title: string
   color: string
