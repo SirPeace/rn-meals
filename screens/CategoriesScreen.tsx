@@ -27,6 +27,7 @@ const CategoriesScreen: TabNavigationScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       <FlatList
+        style={styles.listContainer}
         data={store.categories.data.slice()}
         renderItem={listItem => (
           <CategoryCard
@@ -44,7 +45,10 @@ const CategoriesScreen: TabNavigationScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    padding: 10,
+  },
+
+  listContainer: {
+    paddingHorizontal: 5,
   },
 
   category: {
