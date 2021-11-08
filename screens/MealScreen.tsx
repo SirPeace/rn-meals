@@ -30,7 +30,9 @@ const MealScreen: StackNavigationScreen = props => {
             Ingredients
           </Text>
           {meal.ingredients.map(ingredient => (
-            <Text style={styles.listItem}>• {ingredient}</Text>
+            <Text key={ingredient} style={styles.listItem}>
+              • {ingredient}
+            </Text>
           ))}
         </View>
 
@@ -39,7 +41,7 @@ const MealScreen: StackNavigationScreen = props => {
             Steps
           </Text>
           {meal.steps.map((step, index) => (
-            <Text style={styles.listItem}>
+            <Text key={step} style={styles.listItem}>
               {index + 1}) {step}
             </Text>
           ))}

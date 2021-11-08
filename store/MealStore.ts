@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx"
+
 import MealAPI, { Meal } from "../api/Meal"
 
 class MealStore {

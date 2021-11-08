@@ -1,11 +1,11 @@
-import { observer } from "mobx-react-lite"
 import React from "react"
 import { ScrollView, StyleSheet, Switch, View } from "react-native"
 import { NavigationStackScreenComponent as StackNavigationScreen } from "react-navigation-stack"
-import Loader from "../components/UI/Loader"
+import { observer } from "mobx-react-lite"
 
-import Text from "../components/UI/Text"
 import colors from "../constants/colors"
+import Loader from "../components/UI/Loader"
+import Text from "../components/UI/Text"
 import store from "../store"
 
 const FiltersScreen: StackNavigationScreen = ({ navigation }) => {

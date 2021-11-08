@@ -16,19 +16,25 @@ const CategoryMealsScreen: StackNavigationScreen = ({ navigation }) => {
 
   const selectedCategory = navigation.getParam("category") as Category
 
-  const categoryMeals = React.useMemo(
-    () =>
-      store.meals.data.filter(meal =>
-        meal.categories.find(cat => cat.id === selectedCategory.id)
-      ),
-    [store.meals.data]
-  )
+  const meals = React.useMemo(() => {
+    const categoryMeals = store.meals.data.filter(meal =>
+      meal.categories.find(category => category.id === selectedCategory.id)
+    )
+
+    const appliedFilters = store.filters.data.filter(filter => filter.isActive)
+
+    return categoryMeals.filter(category =>
+      appliedFilters.every(filter =>
+        category.filters.find(categoryFilter => categoryFilter.id === filter.id)
+      )
+    )
+  }, [store.meals.data])
 
   if (loading) return <Loader />
 
   return (
     <View style={styles.screen}>
-      <MealsList meals={categoryMeals} navigation={navigation} />
+      <MealsList meals={meals} navigation={navigation} />
     </View>
   )
 }
