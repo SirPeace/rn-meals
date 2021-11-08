@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite"
 import React from "react"
 import { View, StyleSheet } from "react-native"
 import { NavigationStackScreenComponent as StackNavigationScreen } from "react-navigation-stack"
@@ -36,4 +37,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default FavoriteMealsScreen
+export default observer(FavoriteMealsScreen)

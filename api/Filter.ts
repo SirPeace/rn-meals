@@ -7,14 +7,12 @@ export interface Filter {
 }
 
 const FilterAPI = {
-  api: `${serverConfig.host}:${serverConfig.port}`,
+  api: `${serverConfig.host}:${serverConfig.port}/filters`,
 
   async get(): Promise<Filter[]> {
-    const response = await axios.get(`${this.api}/filters`)
+    const response = await axios.get(this.api)
 
-    const filters = response.data.data
-
-    return filters
+    return response.data.data
   },
 }
 

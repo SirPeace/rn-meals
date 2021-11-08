@@ -8,6 +8,10 @@ class CategoryStore {
     makeAutoObservable(this)
   }
 
+  find(id: number) {
+    return this.data.find(category => category.id === id)
+  }
+
   setCategories(categories: Category[]) {
     this.data = categories
   }

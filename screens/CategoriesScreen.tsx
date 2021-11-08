@@ -20,7 +20,7 @@ const CategoriesScreen: TabNavigationScreen = ({ navigation }) => {
   const navigateToCategoryMealsScreen = (category: Category) => {
     navigation.navigate({
       routeName: "CategoryMeals",
-      params: { category },
+      params: { categoryId: category.id },
     })
   }
 

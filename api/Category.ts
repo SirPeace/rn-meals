@@ -8,14 +8,12 @@ export interface Category {
 }
 
 const CategoryAPI = {
-  api: `${serverConfig.host}:${serverConfig.port}`,
+  api: `${serverConfig.host}:${serverConfig.port}/categories`,
 
   async get(): Promise<Category[]> {
-    const response = await axios.get(`${this.api}/categories`)
+    const response = await axios.get(this.api)
 
-    const categories = response.data.data
-
-    return categories
+    return response.data.data
   },
 }
 

@@ -1,13 +1,24 @@
 import React from "react"
 import { Image, ScrollView, StyleSheet, View } from "react-native"
 import { NavigationStackScreenComponent as StackNavigationScreen } from "react-navigation-stack"
+import { observer } from "mobx-react-lite"
 
 import { Meal } from "../api/Meal"
 import Text from "../components/UI/Text"
 import colors from "../constants/colors"
+import store from "../store"
 
-const MealScreen: StackNavigationScreen = props => {
-  const meal = props.navigation.getParam("meal") as Meal
+const MealScreen: StackNavigationScreen = ({ navigation }) => {
+  const meal = React.useMemo(
+    () => store.meals.find(navigation.getParam("mealId")),
+    [store.meals.data]
+  ) as Meal
+
+  React.useEffect(() => {
+    navigation.setParams({
+      toggleFavorite: () => store.meals.toggleFavorite(meal),
+    })
+  }, [meal])
 
   return (
     <ScrollView>
@@ -82,4 +93,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default MealScreen
+export default observer(MealScreen)

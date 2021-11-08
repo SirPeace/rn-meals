@@ -18,6 +18,7 @@ import { Category } from "../api/Category"
 import { Meal } from "../api/Meal"
 import HeaderButton from "../components/HeaderButton"
 import FiltersScreen from "../screens/FiltersScreen"
+import store from "../store"
 
 const defaultNavigationOptions: NavigationStackOptions = {
   headerStyle: {
@@ -55,7 +56,9 @@ const mainStackNavigator = createStackNavigator(
     CategoryMeals: {
       screen: CategoryMealsScreen,
       navigationOptions: ({ navigation }) => {
-        const category = navigation.getParam("category") as Category
+        const category = store.categories.find(
+          navigation.getParam("categoryId")
+        ) as Category
 
         return {
           headerTitle: `Category: ${category.title}`,
@@ -66,17 +69,26 @@ const mainStackNavigator = createStackNavigator(
     Meal: {
       screen: MealScreen,
       navigationOptions: ({ navigation }) => {
-        const meal = navigation.getParam("meal") as Meal
+        const meal = store.meals.find(navigation.getParam("mealId")) as Meal
+        const toggleFavorite = navigation.getParam("toggleFavorite")
 
         return {
           headerTitle: meal.title,
           headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
-              <Item
-                title="Favorite"
-                iconName="star"
-                onPress={() => console.log("favorite")}
-              />
+              {meal.isFavorite ? (
+                <Item
+                  title="Favorite"
+                  iconName="star"
+                  onPress={() => toggleFavorite(meal)}
+                />
+              ) : (
+                <Item
+                  title="Favorite"
+                  iconName="star-outline"
+                  onPress={() => toggleFavorite(meal)}
+                />
+              )}
             </HeaderButtons>
           ),
         }
@@ -112,7 +124,7 @@ const favoritesStackNavigator = createStackNavigator(
     Meal: {
       screen: MealScreen,
       navigationOptions: ({ navigation }) => {
-        const meal = navigation.getParam("meal") as Meal
+        const meal = store.meals.find(navigation.getParam("mealId")) as Meal
 
         return { headerTitle: meal.title }
       },

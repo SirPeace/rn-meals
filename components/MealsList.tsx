@@ -21,7 +21,7 @@ const MealsList: React.FC<PropsType> = ({ meals, navigation, ...props }) => {
           onPress={() =>
             navigation.navigate({
               routeName: "Meal",
-              params: { meal: listItem.item },
+              params: { mealId: listItem.item.id },
             })
           }
         />
